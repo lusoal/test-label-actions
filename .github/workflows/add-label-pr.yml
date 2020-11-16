@@ -20,7 +20,7 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            if (${env.VARIABLE_NAME}) {
+            if ("${env.VARIABLE_NAME}") {
 
               github.issues.addLabels({
                 issue_number: context.issue.number,
