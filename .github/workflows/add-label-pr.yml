@@ -19,8 +19,9 @@ jobs:
         uses: actions/github-script@v3
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
+          branch_name: ${{env.BRANCH_NAME}}
           script: |
-            if ("${env.VARIABLE_NAME}" == "feat/test_trigger") {
+            if (branch_name == "feat/test_trigger") {
 
               github.issues.addLabels({
                 issue_number: context.issue.number,
