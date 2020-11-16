@@ -8,10 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Step that prints name of pull request's base branch
-        run: |
-          echo "Pull request's base branch is: ${GITHUB_REF##*/}"
+        uses: igordcsouza/github-action-get-branch-name@master
         env:
-          BASE_BRANCH: ${{ github.base_ref }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          
+      - name: Set branch name as VARIABLE_NAME
+        run: echo ::set-env name=VARIABLE_NAME::${BRANCH_NAME}
+
       - name: Create Label
         uses: actions/github-script@v3
         with:
