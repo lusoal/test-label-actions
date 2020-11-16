@@ -6,9 +6,9 @@ on:
 jobs:
   apply-label:
     runs-on: ubuntu-latest
+    if: contains(github.ref, "release")
     steps:
       - name: Create Label
-        if: contains('feat/', github.ref)
         uses: actions/github-script@v3
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
