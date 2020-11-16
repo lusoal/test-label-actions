@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Step that prints name of pull request's base branch
         run: |
-          echo "Pull request's base branch is: ${BASE_BRANCH}"
+          echo "Pull request's base branch is: ${GITHUB_REF##*/}"
         env:
           BASE_BRANCH: ${{ github.base_ref }}
       - name: Create Label
