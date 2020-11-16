@@ -7,6 +7,11 @@ jobs:
   apply-label:
     runs-on: ubuntu-latest
     steps:
+      - name: Step that prints name of pull request's base branch
+        run: |
+          echo "Pull request's base branch is: ${BASE_BRANCH}"
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
       - name: Create Label
         uses: actions/github-script@v3
         with:
