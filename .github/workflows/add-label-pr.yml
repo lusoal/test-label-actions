@@ -9,7 +9,6 @@ jobs:
     steps:
       - name: Get head ref
         run: echo "Base branch of PR ${{github.head_ref}}"
-
       - name: Create Label
         if: github.head_ref == 'refs/heads/release'
         uses: actions/github-script@v3
