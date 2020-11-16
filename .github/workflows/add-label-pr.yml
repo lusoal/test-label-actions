@@ -8,17 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create Label
+        if: github.ref == 'feat/test_trigger'
         uses: actions/github-script@v3
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            if (github.head_ref == "feat/test_trigger") {
-
-              github.issues.addLabels({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                labels: ['Triage']
-              })
-
-            }
+            github.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['Triage']
+            })
