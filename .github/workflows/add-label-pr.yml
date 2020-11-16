@@ -1,9 +1,6 @@
 name: Pull Request Add Laber
 on:
-  pull_request:
-    branches:    
-      # Push events on main branch
-      - 'feat/**'
+  pull_request_target:
     types: [opened]
 
 jobs:
@@ -15,9 +12,13 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            github.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ['Triage']
-            })
+            if (github.head_ref == "feat/test_trigger") {
+
+              github.issues.addLabels({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: ['Triage']
+              })
+
+            }
