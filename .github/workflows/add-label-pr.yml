@@ -1,34 +1,23 @@
 name: Pull Request Add Laber
 on:
-  pull_request_target:
+  pull_request:
+    branches:    
+      # Push events on main branch
+      - 'feat/**'
     types: [opened]
 
 jobs:
   apply-label:
     runs-on: ubuntu-latest
     steps:
-      - name: Step that prints name of pull request's base branch
-        uses: igordcsouza/github-action-get-branch-name@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Set branch name as VARIABLE_NAME
-        run: echo ::set-env name=VARIABLE_NAME::${BRANCH_NAME}
-
       - name: Create Label
         uses: actions/github-script@v3
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const branch_name_test = ${{VARIABLE_NAME}}
-            console.log(branch_name_test)
-            if (branch_name == "feat/test_trigger") {
-
-              github.issues.addLabels({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                labels: ['Triage']
-              })
-
-            }
+            github.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['Triage']
+            })
